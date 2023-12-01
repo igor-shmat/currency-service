@@ -1,0 +1,11 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:15.4
+    environment:
+      POSTGRES_DB: "currency_db"
+      POSTGRES_USER: "currency_db_user"
+      POSTGRES_PASSWORD: "currency_db_pass"
+    ports:
+      - "5432:5432"
