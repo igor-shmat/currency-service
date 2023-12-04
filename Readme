@@ -11,3 +11,117 @@
 
 
 База поднимается через docker-compose, миграции накатываются автоматом после запуска приложения.
+
+API endpoints:
+---------------------------------------------------------
+GET /exchangeRate/getByCurrencyCode
+Параметры запроса:
+
+currencyCodeFrom (трехзначный код валюты)  
+currencyCodeTo (трехзначный код валюты)
+
+UAH = 980
+USD = 840
+EUR = 978
+
+Пример ответа:
+{
+    "currencyCodeFrom": 840,
+    "currencyCodeTo": 980,
+    "buyRate": 36.4400,
+    "sellRate": 37.2995,
+    "dateRate": "2023-12-04T00:01:13"
+}
+
+----------------------------------------------------------
+GET /exchangeRate/getFromUSDToUAH
+Без параметров
+Возвращает последний курс на поточную дату пары USD к UAH
+
+{
+    "currencyCodeFrom": 840,
+    "currencyCodeTo": 980,
+    "buyRate": 36.4400,
+    "sellRate": 37.2995,
+    "dateRate": "2023-12-04T00:01:13"
+}
+----------------------------------------------------------
+GET /exchangeRate/getAllToday
+Без параметров
+Возвращает массив самых актуальных на сегодня курсов валют 
+Если курсов на сегодняшний день нету, возвращает пустой массив
+
+Пример ответа:
+[
+    {
+        "currencyCodeFrom": 840,
+        "currencyCodeTo": 980,
+        "buyRate": 36.4400,
+        "sellRate": 37.2995,
+        "dateRate": "2023-12-04T00:01:13"
+    },
+    {
+        "currencyCodeFrom": 978,
+        "currencyCodeTo": 980,
+        "buyRate": 39.6100,
+        "sellRate": 40.7398,
+        "dateRate": "2023-12-04T08:56:13"
+    },
+    {
+        "currencyCodeFrom": 978,
+        "currencyCodeTo": 840,
+        "buyRate": 1.0820,
+        "sellRate": 1.0940,
+        "dateRate": "2023-12-04T00:01:13"
+    }
+]
+----------------------------------------------------------
+GET /exchangeRate/getAll
+без параметров
+Возвращает массив всех курсов за все время.
+
+[
+    {
+        "currencyCodeFrom": 840,
+        "currencyCodeTo": 980,
+        "buyRate": 36.3500,
+        "sellRate": 37.2995,
+        "dateRate": "2023-11-30T00:01:13"
+    },
+    {
+        "currencyCodeFrom": 978,
+        "currencyCodeTo": 980,
+        "buyRate": 39.6500,
+        "sellRate": 40.7997,
+        "dateRate": "2023-12-01T08:46:13"
+    },
+    {
+        "currencyCodeFrom": 978,
+        "currencyCodeTo": 840,
+        "buyRate": 1.0860,
+        "sellRate": 1.0990,
+        "dateRate": "2023-12-01T08:01:13"
+    },
+    {
+        "currencyCodeFrom": 840,
+        "currencyCodeTo": 980,
+        "buyRate": 36.4400,
+        "sellRate": 37.2995,
+        "dateRate": "2023-12-04T00:01:13"
+    },
+    {
+        "currencyCodeFrom": 978,
+        "currencyCodeTo": 980,
+        "buyRate": 39.6100,
+        "sellRate": 40.7398,
+        "dateRate": "2023-12-04T08:56:13"
+    },
+    {
+        "currencyCodeFrom": 978,
+        "currencyCodeTo": 840,
+        "buyRate": 1.0820,
+        "sellRate": 1.0940,
+        "dateRate": "2023-12-04T00:01:13"
+    }
+]
+----------------------------------------------------------
